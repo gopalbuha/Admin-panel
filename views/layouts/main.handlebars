@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  {{!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css"> --}}
+  
+  {{!-- <link rel="icon" href="../assets/img/icon.ico" type="image/x-icon" />
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/atlantis.css">
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link rel="stylesheet" href="../assets/css/demo.css">--}}
+</head> 
+
+<body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
+  {{!-- <script src="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css"></script> --}}
+  {{!-- <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script> --}}
+  
+    
+  
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.6/sweetalert2.min.js "
+    integrity="sha512-HHyjGIwkaebtvIltQzrdVe1FgE+eNQMVrRSxdA8XHUGmcs+k/9brB4DoRWxv9wjPRKvIOHrfp0s/2gLPMGf8OA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.6/sweetalert2.js "
+    integrity="sha512-vtRhxdoxVVCiENPpHfiXgvgMoMx9JfNyvT3D1SRgDZqc78kGrCIgtSUnxZM7umi3GO/7T937byLI4VYUtVJ1lw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.6/sweetalert2.css "
+    integrity="sha512-JzSVRb7c802/njMbV97pjo1wuJAE/6v9CvthGTDxiaZij/TFpPQmQPTcdXyUVucsvLtJBT6YwRb5LhVxX3pQHQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+  <script>
+    function previewFile(input) {
+      var file = $("input[type=file]").get(0).files[0];
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          $("#previewImg").attr("src", reader.result);
+        }
+        reader.readAsDataURL(file);
+      }
+    }    
+  </script>
+  {{{body}}}
+
+</body>
+
+</html>

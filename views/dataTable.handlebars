@@ -1,0 +1,424 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+</head>
+
+<div class="main-panel">
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <h4 class="page-title">DataTables.Net</h4>
+                <ul class="breadcrumbs">
+                    <li class="nav-home">
+                        <a href="#">
+                            <i class="flaticon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Tables</a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Datatables</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Basic</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table action="dataTable" id="basic-datatables" class="display table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                             <th>id</th>
+                                            <th>Category</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                            {{!-- <th>update</th>
+                                            <th>delete</th> --}}
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Category</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {{#each categories}}
+                                        <tr>
+
+                                        <td>{{id}}</td>
+                                        <td>{{Category}}</td>
+                                        {{!-- <td>{{password}}</td> --}}
+                                        <td><a href="categoryUpdate/{{id}}"><button>Edit</button></a></td>
+                                        <td><button class="removeCategory" data-id="{{id}}">Delete</button></td>
+
+                                        </tr>
+                                        {{/each}}
+                                        {{!-- <a href="/register"><button class="redbtn">Register</button></a> --}}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Multi Filter Select</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="multi-filter-select" class="display table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Category</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                            {{!-- <th>update</th>
+                                            <th>delete</th> --}}
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                         {{#each categories}}
+                                        <tr>
+                                            <td>{{id}}</td>
+                                        <td>{{Category}}</td>
+                                        {{!-- <td>{{password}}</td> --}}
+                                        <td><a href="categoryUpdate/{{id}}"><button>Edit</button></a></td>
+                                        <td><button class="removeCategory" data-id="{{id}}">Delete</button></td>
+
+                                        </tr>
+                                        {{/each}}
+                                        {{!-- <a href="/register"><button class="redbtn">Register</button></a> --}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">Add Row</h4>
+                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
+                                    data-target="#addRowModal">
+                                    <i class="fa fa-plus"></i>
+                                    Add Row
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+           
+    <!-- Core JS Files -->
+  <script src="../dataTable/js/core/jquery.3.2.1.min.js"></script>
+  <script src="../dataTable/js/core/popper.min.js"></script>
+  <script src="../../dataTable/js/core/bootstrap.min.js"></script>
+
+  <!-- jQuery UI -->
+  <script src="../dataTable/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+  <script src="../dataTable/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+  <!-- jQuery Scrollbar -->
+  <script src="../../dataTable/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+  <!-- Moment JS -->
+  <script src="../dataTable/js/plugin/moment/moment.min.js"></script>
+
+  <!-- Chart JS -->
+  <script src="../dataTable/js/plugin/chart.js/chart.min.js"></script>
+
+  <!-- jQuery Sparkline -->
+  <script src="../dataTable/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+  <!-- Chart Circle -->
+  <script src="../dataTable/js/plugin/chart-circle/circles.min.js"></script>
+
+  <!---Datatables -->
+  <script src="../dataTable/js/plugdatatabldatatables.min.js"></script>
+
+  <!-- Bootstrap Notify -->
+  <script src="../dataTable/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+  <!-- Bootstrap Toggle -->
+  <script src="../dataTable/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
+  <!-- jQuery Vector Maps -->
+  <script src="../dataTable/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+  <script src="../dataTable/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+  <!-- Google Maps Plugin -->
+  <script src="../dataTable/js/plugin/gmaps/gmaps.js"></script>
+
+  <!-- Dropzone -->
+  <script src="../dataTable/js/plugin/dropzone/dropzone.min.js"></script>
+
+  <!-- Fullcalendar -->
+  <script src="../dataTable/js/plugin/fullcalendar/fullcalendar.min.js"></script>
+
+  <!-- DateTimePicker -->
+  <script src="../dataTable/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
+
+  <!-- Bootstrap Tagsinput -->
+  <script src="../dataTable/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+
+  <!-- Bootstrap Wizard -->
+  <script src="../dataTable/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
+
+  <!-- jQuery Validation -->
+  <script src="../dataTable/js/plugin/jquery.validate/jquery.validate.min.js"></script>
+
+  <!-- Summernote -->
+  <script src="../dataTable/js/plugin/summernote/summernote-bs4.min.js"></script>
+
+  <!-- Select2 -->
+  <script src="../dataTable/js/plugin/select2/select2.full.min.js"></script>
+
+  <!-- Sweet Alert -->
+  <script src="../dataTable/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+  <!-- Owl Carousel -->
+  <script src="../dataTable/js/plugin/owl-carousel/owl.carousel.min.js"></script>
+
+  <!-- Magnific Popup -->
+  <script src="../dataTable/js/plugin/jquery.magnific-popup/jquery.magnific-popup.min.js"></script>
+
+  <!-- Atlantis JS -->
+  <script src="../dataTable/js/atlantis.min.js"></script>
+
+  <!-- Atlantis DEMO methods, don't include it in your project! -->
+  <script src="../dataTable/js/setting-demo.js"></script>
+  <script src="../dataTable/js/demo.js"></script>
+
+    
+        <script>
+            $(document).ready(function () {
+                $('#basic-datatables').DataTable();
+            });
+        </script>
+
+        {{!-- ------------------------------------------------------------------------ --}}
+        {{!--<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+</head>
+<style>
+  tr:nth-child(even) {
+    background-color: rgb(237, 233, 227);
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-right: 5%;
+
+  }
+
+  td,
+  th {
+    border: 1px solid #e1dcdc;
+    text-align: left;
+    padding: 5px;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .redbtn {
+    width: 100px;
+    padding: 13px;
+    background-color: rgb(24, 41, 227);
+    border: blue;
+    color: white;
+    margin: 1% 0% 1% 3%;
+  }
+</style>
+<div class="main-panel">
+  <div class="container">
+    <div class="page-inner">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Data table</h4>
+          <div class="row">
+            <div class="col-12">
+              <div class="table-responsive">
+                <table action="view-orderDetails" method="GET" id="basic-datatables">
+                  <thead>
+                    <tr>
+                      {{!-- <th>OrderId</th> --}}
+                      {{!-- <th>Product</th> --}}
+                      <th>userName</th>
+                      <th>ProductName</th>
+                      <th>price</th>
+                      <th>qty</th>
+                      <th>Date</th>
+                      <th>Details</th>
+                      <th>Cancel</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {{#each orderDetailsView}}
+                    <tr>
+                      {{!-- <td>{{orderId}}</td> --}}
+                      {{!-- <td>{{product}}</td> --}}
+                      <td>{{userName}}</td>
+                      <td>{{productName}}</td>
+                      <td>{{price}}</td>
+                      <td>{{qty}}</td>
+                      <td>{{createdAt}}</td>
+
+                      <td><a href="productUpdate/{{id}}"><button
+                            class="btn-xs btn-success rounded-lg">Details</button></a></td>
+                      <td><button id="removeCategory" onclick="productUpdate('{{id}}')"
+                          class="btn-xs btn-danger rounded-lg" data-id="{{id}}">Cancel</button></td>
+                    </tr>
+                    {{/each}}
+
+
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+<!-- Core JS Files -->
+<script src="../dataTable/js/core/jquery.3.2.1.min.js"></script>
+<script src="../dataTable/js/core/popper.min.js"></script>
+<script src="../../dataTable/js/core/bootstrap.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="../dataTable/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="../dataTable/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="../../dataTable/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+<!-- Moment JS -->
+<script src="../dataTable/js/plugin/moment/moment.min.js"></script>
+
+<!-- Chart JS -->
+<script src="../dataTable/js/plugin/chart.js/chart.min.js"></script>
+
+<!-- jQuery Sparkline -->
+<script src="../dataTable/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Chart Circle -->
+<script src="../dataTable/js/plugin/chart-circle/circles.min.js"></script>
+
+<!---Datatables -->
+<script src="../dataTable/js/plugdatatabldatatables.min.js"></script>
+
+<!-- Bootstrap Notify -->
+<script src="../dataTable/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+<!-- Bootstrap Toggle -->
+<script src="../dataTable/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="../dataTable/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+<script src="../dataTable/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+<!-- Google Maps Plugin -->
+<script src="../dataTable/js/plugin/gmaps/gmaps.js"></script>
+
+<!-- Dropzone -->
+<script src="../dataTable/js/plugin/dropzone/dropzone.min.js"></script>
+
+<!-- Fullcalendar -->
+<script src="../dataTable/js/plugin/fullcalendar/fullcalendar.min.js"></script>
+
+<!-- DateTimePicker -->
+<script src="../dataTable/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
+
+<!-- Bootstrap Tagsinput -->
+<script src="../dataTable/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+
+<!-- Bootstrap Wizard -->
+<script src="../dataTable/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
+
+<!-- jQuery Validation -->
+<script src="../dataTable/js/plugin/jquery.validate/jquery.validate.min.js"></script>
+
+<!-- Summernote -->
+<script src="../dataTable/js/plugin/summernote/summernote-bs4.min.js"></script>
+
+<!-- Select2 -->
+<script src="../dataTable/js/plugin/select2/select2.full.min.js"></script>
+
+<!-- Sweet Alert -->
+<script src="../dataTable/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+<!-- Owl Carousel -->
+<script src="../dataTable/js/plugin/owl-carousel/owl.carousel.min.js"></script>
+
+<!-- Magnific Popup -->
+<script src="../dataTable/js/plugin/jquery.magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<!-- Atlantis JS -->
+<script src="../dataTable/js/atlantis.min.js"></script>
+
+<!-- Atlantis DEMO methods, don't include it in your project! -->
+<script src="../dataTable/js/setting-demo.js"></script>
+<script src="../dataTable/js/demo.js"></script>
+
+<script>
+   $(document).ready(function () {
+    $('#basic-datatables').DataTable();
+   });
+</script>
+<script>
+    $(document).ready(function () {
+      $('#basic-datatables').DataTable({
+        "searching": true,    // enable search box
+        "paging": true,       // enable pagination
+        "ordering": true,     // enable sorting
+        "lengthChange": true, // enable rows per page dropdown
+        "pageLength": 10      // set default rows per page
+      });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+

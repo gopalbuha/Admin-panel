@@ -1,0 +1,125 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.4/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/datatables.min.js"></script>
+<style>
+    tr:nth-child(even) {
+        background-color: rgb(237, 233, 227);
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-right: 5%;
+        background-color: aliceblue;
+    }
+
+    td,
+    th {
+        border: 1px solid #e1dcdc;
+        text-align: center;
+        padding: 8px;
+    }
+
+    button {
+        width: 60px;
+    }
+
+    .redbtn {
+        width: 100px;
+        padding: 13px;
+        background-color: rgb(24, 41, 227);
+        border: blue;
+        color: white;
+        margin: 1% 0% 1% 3%;
+    }
+
+    img {
+        width: 80px;
+        height: 30px;
+
+    }
+</style>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title"></h4>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+
+                    <table method="GET" id="order-listing" class="dataTAble">
+                        <thead>
+                        <tr>
+                            {{!-- <th>id</th> --}}
+                            <th>Category</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each categories}}
+                        <tr>
+                            {{!-- <td>{{id}}</td> --}}
+                            <td>{{category}}</td>
+                            {{!-- <td>{{password}}</td> --}}
+                            <td><a href="update/{{id}}"><button
+                                        class="btn-xs btn-success rounded-lg">Edit</button></a></td>
+                            <td><button class="removeCategory btn-xs btn-danger rounded-lg"
+                                    onclick="categoryDelete('{{id}}')">Delete</button></td>
+                        </tr>
+                        {{/each}}
+                       </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../table/vendors/js/vendor.bundle.base.js"></script>
+<script src="../table/vendors/js/vendor.bundle.addons.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="../table/js/off-canvas.js"></script>
+<script src="../table/js/hoverable-collapse.js"></script>
+<script src="../table/js/misc.js"></script>
+<script src="../table/js/settings.js"></script>
+<script src="../table/js/todolist.js"></script>
+<!-- endinject -->
+
+<!-- Custom js for this page-->
+<script src="../table/js/data-table.js"></script>
+{{!--
+<script> src = "https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"</script>
+<script src="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"></script> --}}
+
+<script>
+    function categoryDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/category/delete/' + id,
+                    success: function (response) {
+                        if (response.statusCode === 200) {
+
+                            window.location.href = response.redirect;
+                        }
+                    },
+
+                    error: function (err) {
+                        console.log(err);
+                        Swal.fire('Please Try Again');
+                    }
+                });
+            }
+        })
+    };
+</script>

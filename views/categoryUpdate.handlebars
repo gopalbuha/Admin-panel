@@ -1,0 +1,126 @@
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    .container {
+        padding: 35px;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    button {
+        background-color:blue;
+        padding: 14px 12px;
+        margin: 30px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        font-size: 22px;
+        color: aliceblue;
+
+    }
+
+    input[type=text],
+    input[type=password],
+    input[type=number],
+    input[type=email] {
+        width: 100%;
+        padding: 13px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    img {
+        width: 150px;
+        height: 90px;
+    }
+</style>
+<form method="post" id="updatef" name="updateForm" onsubmit="return false">
+    <div class="container">
+        <h1>Update Category</h1>
+        <p>Please Update Your infomation .</p>
+        <hr>
+        <label><b>Category :</b></label>
+        <input type="text" name="Category" id="category" value="{{updateUser.category}}"><br>
+        <input type="hidden" name="id" id="id" value="{{updateUser.id}}"><br>
+        <button class="edit" onclick="updateCategory()"><b>Update</b></button>
+    </div>
+</form>
+
+<script>
+    function updateCategory() {
+        var data = new FormData($('#updatef')[0]);
+        var category = $('#category').val();
+        var id = $('#id').val();
+        var url = '/category/update-record';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'json',
+            data: { category, id },
+            dataSrc: "",
+            
+            success: function (data) {
+                if(data.status){
+                Swal.fire(
+                    'update!',
+                    'Your data has been updated.',
+                    'success'
+                ).then(function () {
+                    window.location.href = data.redirect;
+                });
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: data.message,
+                    });
+                }
+            }
+        });
+    };
+</script>
+
+
+{{!--
+<script>
+</script> --}}
+{{!-- $(".edit").click(function (event) {
+var category = $('#category').val();
+var id = $('#id').val();
+var url = '/updateCategory';
+$.ajax({
+type: 'POST',
+url: url,
+dataType: 'json',
+data: { category, id },
+dataSrc: "",
+success: function (data) {
+Swal.fire(
+'update!',
+'Your data has been updated.',
+'success'
+).then(function () {
+
+window.location.href = data.redirect;
+// $("#category").val('');
+// $("#subCategory").val('');
+});
+
+//alert('update successful')
+//
+}
+});
+
+}); --}}

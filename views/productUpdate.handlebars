@@ -1,0 +1,243 @@
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    .container {
+        padding: 35px;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    button {
+        background-color: #0f4de8;
+        padding: 14px 20px;
+        margin: 30px 0;
+        border: none;
+        cursor: pointer;
+        width: 99%;
+        opacity: 0.9;
+        font-size: 22px;
+        float: right;
+    }
+
+    .canclebutton {
+        background-color: #e80f1a;
+        padding: 14px 20px;
+        margin: 30px 0;
+        border: none;
+        cursor: pointer;
+        width: 41%;
+        opacity: 0.9;
+        font-size: 22px;
+        float: left;
+    }
+
+    input[type=text],
+    input[type=password],
+    input[type=number],
+    input[type=email] {
+        width: 100%;
+        padding: 13px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    select[name="category"],
+    select[name="subCategories"] {
+        width: 100%;
+        padding: 13px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    .multipleImage {
+        width: 50%;
+        display: flex;
+        margin-top: 2%;
+    }
+
+    .multipleImage img {
+        width: 138px;
+        height: 128px;
+        display: inline;
+        margin-right: 5%;
+    }
+</style>
+
+<form id="updateProduct" name="updateForm" onsubmit="return false" >
+    <div class="container">
+        <h1>Update Product</h1>
+        <p>Please Update Your infomation .</p>
+        <hr>
+
+        <input type="hidden" name="id" id="userId" value="{{prodductOldData.id}}"><br>
+
+        <label><b>productName :</b></label>
+        <input type="text" name="name" id="product" value="{{prodductOldData.name}}"><br>
+
+        <label><b>category</b></label>
+        <select id="category" name="category" placeholder="select category">
+            <option value="" disabled selected>{{categoryOneData.Category}} </option>
+            {{#each listCategory}}
+            <option value="{{id}}">{{Category}} </option>
+            {{/each}}
+        </select><br>
+
+
+        <label><b>subCategory :</b></label>
+        <select id="subCategory" name="subCategories" placeholder="select category">
+            <option value="" disabled selected>{{subCategoryEdit.subcategory}}</option>
+            {{#each subCategoryList}}
+            <option value="{{id}}">{{subCategory}} </option>
+            {{/each}}
+        </select><br>
+
+        <lable><b>price :</b></lable>
+        <input type="text" name="price" id="price" value="{{prodductOldData.price}}"><br>
+
+        <label><b>discount :</b></label>
+        <input type="text" name="discount" id="discount" value="{{prodductOldData.price}}"><br>
+
+
+        <label class="lablclass"><b>thumbnail :</b></label><br>
+        <input type="text" value="{{prodductOldData.thumbnail}}"><br>
+        <input type="file" name="Image" class="inputclass" accept="image/*" value="{{prodductOldData.thumbnail}}"
+            onchange="previewFile(this);"><br><br>
+        <img src="/images/{{prodductOldData.thumbnail}}" id="previewImg" class="thumbnail"
+            style="width: 100px; height: 100px; object-fit: cover;"><br><br>
+
+        <label><b>Image</b></label><br>
+
+        <input type="file" name="file[]" id="gallery-photo-add" accept="image/*" value="{{image}}"
+            onchange="previewfile(this);" multiple><br><br>
+        {{!-- <input type="text" name="photo" id="data" value="{{image}}"><br> --}}
+        {{!-- <img src="/images/{{1677568246281_a1.jpg}} "
+            style="width: 100px; height: 100px; object-fit: cover;"><br><br> --}}
+        <div class="gallery" id="preview"></div>
+        {{!-- <input type="text" value="{{this}}"> --}}
+        <div class="multipleImage">
+            {{#each prodductOldData.image}}
+            <img src="/images/{{this}}" id="preview">
+            {{/each}}
+        </div>
+        {{!-- <button class="canclebutton" onclick="uodateCancel()"><b>cancel</b></button> --}}
+        <button class="edit" onclick="productUpdate()"><b>Update</b></button>
+    </div>
+</form>
+
+<script>
+    function productUpdate() {
+        var data = new FormData($('#updateProduct')[0]);
+        $.ajax({
+            url: '/productUpdate/{{prodductOldData.id}}',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: data,
+            success: function (data) {
+                Swal.fire(
+                    'update!',
+                    'Your data has been updated.',
+                    'success'
+                ).then(function () {
+                    window.location.href = data.redirect;
+                    // $("#category").val('');
+                    // $("#subCategory").val('');
+                });
+
+                //alert('update successful')
+                //window.location.href = "/viewCategory"
+            }
+        });
+    };
+</script>
+<script>
+    function previewfile() {
+        var preview = document.querySelector('#preview');
+        if (this.files) {
+            for (var i = 0; i < this.files.length; i++) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    var img = new Image();
+                    img.style.maxWidth = '200px';
+                    img.src = event.target.result;
+                    preview.appendChild(img);
+                }
+                reader.readAsDataURL(this.files[i]);
+            }
+        }
+    }
+</script>
+
+
+{{!-- $(".edit").click(function(event) {
+var data = new FormData($('#updateProduct')[0]);
+$.ajax({
+url:'/productUpdate/{{prodductOldData.id}}',
+type: 'POST',
+contentType: false,
+processData: false,
+cache: false,
+data: data,
+success: function(res){
+alert(" Data Sucessfull Update.");
+//$("#employ")[0].reset();
+//$("#output").attr('src','');
+window.location.href = "/listData"
+},
+error: function(e){
+console.log(e);
+alert('Something Wrong');
+}
+})
+}); --}}
+
+
+
+{{!--
+$(".edit").click(function (event) {
+var product = $('#product').val();
+var id = $('#userId').val();
+var category = $('#category').val();
+var subCategory = $('#subCategory').val();
+var price = $('#price').val();
+var discount = $('#discount').val();
+
+var url = '/productDataEdit'
+$.ajax({
+type: 'POST',
+url: url,
+dataType: 'json',
+data: { product, id, category, subCategory, price, discount},
+dataSrc: "",
+
+success: function (data) {
+Swal.fire(
+'update!',
+'Your data has been updated.',
+'success'
+).then(function () {
+window.location.href = data.redirect;
+// $("#category").val('');
+// $("#subCategory").val('');
+});
+
+//alert('update successful')
+//window.location.href = "/viewCategory"
+}
+});
+
+}); --}}

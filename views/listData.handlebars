@@ -1,0 +1,65 @@
+<style>
+    tr:nth-child(even) {
+        background-color: rgb(237, 233, 227);
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-right: 5%;
+      
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    button {
+        width: 60px;
+    }
+
+    .redbtn {
+        width: 100px;
+        padding: 13px;
+        background-color: rgb(24, 41, 227);
+        border: blue;
+        color: white;
+        margin: 1% 0% 1% 3%;
+    }
+
+    img {
+        width: 75px;
+        height: 75px;
+        object-fit: fill;
+    }
+</style>
+
+<table action="/" method="GET">
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Email</th>
+        {{!-- <th>Password</th> --}}
+        <th>Image</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    {{#each addminAdd}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{city}}</td>
+        <td>{{email}}</td>
+        {{!-- <td>{{password}}</td> --}}
+        <td><img src="/images/{{image}}"></td>
+        <td><a href="update/{{_id}}"><button>Edit</button></a></td>
+        <td><button class="removeCategory" data-id="{{_id}}">Delete</button></td>
+    </tr>
+    {{/each}}
+    <a href="/registerForm"><button class="redbtn">Register</button></a>
+</table>

@@ -1,0 +1,130 @@
+<style>
+    tr:nth-child(even) {
+        background-color: rgb(237, 233, 227);
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-right: 5%;
+
+    }
+
+    td,
+    th {
+        border: 1px solid #e1dcdc;
+        text-align: center;
+        padding: 8px;
+    }
+
+    button {
+        width: 60px;
+    }
+
+    .redbtn {
+        width: 100px;
+        padding: 13px;
+        background-color: rgb(24, 41, 227);
+        border: blue;
+        color: white;
+        margin: 1% 0% 1% 3%;
+    }
+
+    img {
+        width: 80px;
+        height: 30px;
+
+    }
+</style>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+
+                    <table id="order-listing" class="table" method="GET" enctype="multipart/form-data">
+                        <thead>
+                            <tr>
+                                {{!-- <th>id</th> --}}
+                                <th><b>category</b></th>
+                                <th><b>subCategory</b></th>
+                                <th><b>Update</b></th>
+                                <th><b>Delete</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each subCategories}}
+                            <tr>
+                                {{!-- <td>{{id}}</td> --}}
+                                <td>{{categoryDetails.category}}</td>
+                                <td>{{subCategory}}</td>
+                                {{!-- <td>{{password}}</td> --}}
+                                <td><a href="update/{{id}}"><button
+                                            class="btn-xs btn-success rounded-lg"><b>Edit</b></button></a></td>
+                                <td><button class="removeSubCategory btn-xs btn-danger rounded-lg"
+                                        onclick="deleteSubCategory('{{id}}')"><b>Delete</b></button></td>
+                            </tr>
+
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- plugins:js -->
+<script src="../table/vendors/js/vendor.bundle.base.js"></script>
+<script src="../table/vendors/js/vendor.bundle.addons.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="../table/js/off-canvas.js"></script>
+<script src="../table/js/hoverable-collapse.js"></script>
+<script src="../table/js/misc.js"></script>
+<script src="../table/js/settings.js"></script>
+<script src="../table/js/todolist.js"></script>
+<!-- endinject -->
+
+<!-- Custom js for this page-->
+<script src="../table/js/data-table.js"></script>
+<!-- End custom js for this page-->
+<script>
+
+    function deleteSubCategory(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/sub-category/delete/' + id,
+                    success: function (response) {
+                        if (response.statusCode === 200) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            );
+                            window.location.href = response.redirect;
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                        Swal.fire('Please Try Again');
+                    }
+                });
+            }
+        })
+
+    };
+
+</script>

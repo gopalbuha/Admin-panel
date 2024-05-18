@@ -1,0 +1,113 @@
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    .container {
+        padding: 35px;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    button {
+        background-color:blue;
+        padding: 14px 20px;
+        margin: 30px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        font-size: 22px;
+        color: aliceblue;
+    }
+
+    input[type=text],
+    input[type=password],
+    input[type=number],
+    input[type=email] {
+        width: 100%;
+        padding: 13px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    select[name="category"] {
+        width: 100%;
+        padding: 13px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    img {
+        width: 150px;
+        height: 90px;
+    }
+</style>
+<form  id="updatef" name="updateForm"
+    onsubmit="return false">
+    <div class="container">
+        <h1>Update subCategory</h1>
+        <p>Please Update Your infomation .</p>
+        <hr>
+
+
+        <label><b>category :</b></label>
+        <select id="category" name="category">
+            <option value="" disabled selected>{{categoryOneData.category}} </option>
+            {{#each listCategory}}
+             <option value="{{id}}">{{category}} </option>
+            {{/each}}
+        </select><br>
+        {{!-- <input type="text" name="id" id="categoryId" value="{{categoryOneData.id}}"><br> --}}
+        <input type="hidden" name="id" id="id" value="{{subCategoryEdit.id}}"><br>
+        <label><b>subCategory :</b></label>
+        <input type="text" name="SubCategory" id="subCategory" value="{{subCategoryEdit.subCategory}}"><br>
+        <button class="edit" onclick="updateSubCategory()"><b>Update</b></button>
+    </div>
+</form>
+
+<script>
+    function updateSubCategory() {
+        var data = new FormData($('#updatef')[0]);
+        var category = $('#category').val();
+        var subCategory = $('#subCategory').val();
+        var id = $('#id').val();
+        var url = '/sub-category/edit'
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            data: { category, subCategory, id },
+            dataSrc: "",
+            success: function (data) {
+                if(data.status){
+                    Swal.fire(
+                        'update!',
+                        'Your data has been updated.',
+                        'success'
+                    ).then(function () {
+                        window.location.href = data.redirect;
+                    });
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: res.message,
+                    });
+                }
+            }
+        });
+
+    };
+</script>
